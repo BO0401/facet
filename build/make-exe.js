@@ -8,28 +8,30 @@
  * 产物：release/Facet-Portable-<version>.exe
  */
 import { spawnSync } from 'child_process';
-import { existsSync, mkdirSync, readFileSync } from 'fs';
-import { join, dirname } from 'path';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'fs';
+import { join, dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
+import { createRequire } from 'module';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const RELEASE = join(ROOT, 'release');
 const pkg = JSON.parse(readFileSync(join(ROOT, 'package.json'), 'utf8'));
-const NPX = process.platform === 'win32' ? 'npx.cmd' : 'npx';
 
-function probe(cmd) {
-  const r = spawnSync(NPX, ['--no-install', cmd, '--version'], { encoding: 'utf8', stdio: 'pipe', cwd: ROOT });
-  return r.status === 0;
-}
-
-function run(args) {
-  const r = spawnSync(NPX, args, { encoding: 'utf8', stdio: 'inherit', cwd: ROOT });
-  if (r.status !== 0) throw new Error('命令失败：' + args.join(' '));
+/* 探测 electron-builder 是否可用：直接解析其 Node 入口（不依赖 npx/shell） */
+function hasBuilder() {
+  try {
+    const req = createRequire(join(ROOT, 'package.json'));
+    const bin = req.resolve('electron-builder/out/cli/cli.js');
+    return existsSync(bin) ? bin : null;
+  } catch (e) {
+    return null;
+  }
 }
 
 mkdirSync(RELEASE, { recursive: true });
 
-if (!probe('electron-builder')) {
+const builderCli = hasBuilder();
+if (!builderCli) {
   console.error('未安装 electron-builder。执行：');
   console.error('  npm i -D electron-builder');
   console.error('');
@@ -64,15 +66,20 @@ const builderConfig = {
 };
 
 const cfgPath = join(ROOT, '.tmp', 'electron-builder.json');
-const { writeFileSync } = await import('fs');
 mkdirSync(join(ROOT, '.tmp'), { recursive: true });
 writeFileSync(cfgPath, JSON.stringify(builderConfig, null, 2), 'utf8');
 
 try {
-  run(['--no-install', 'electron-builder', '--config', cfgPath, '--win', 'portable']);
+  /* 直接用 Node 运行 electron-builder 的 CLI 入口，避开 npx/.cmd 的
+     Windows spawn 限制（.cmd 需要 shell:true 才能启动） */
+  const r = spawnSync(process.execPath, [builderCli, '--config', cfgPath, '--win', 'portable'], {
+    encoding: 'utf8', stdio: 'inherit', cwd: ROOT,
+  });
+  if (r.status !== 0) throw new Error('electron-builder 退出码 ' + r.status);
 } catch (e) {
   console.error('');
-  console.error('electron-builder 失败。常见原因与对策：');
+  console.error('electron-builder 失败：' + e.message);
+  console.error('常见原因与对策：');
   console.error('  1. 无法访问 GitHub releases → 设置 ELECTRON_BUILDER_BINARIES_MIRROR 或改用 dist:dir');
   console.error('  2. 缺少 build/app → 先 npm run build');
   process.exit(1);

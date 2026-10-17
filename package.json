@@ -10,13 +10,16 @@
     "test:spec": "node test/run-spec.js",
     "test:unit": "node test/unit/unit.test.js",
     "test:smoke": "npm run build && node test/unit/bundle-smoke.js",
+    "test:electron": "node test/e2e/e2e-electron.cjs",
     "build": "node build/bundle.js",
     "start": "electron .",
     "dist:dir": "npm run build && node build/make-app.js",
     "dist": "npm run build && node build/make-exe.js"
   },
   "devDependencies": {
-    "electron": "^28.3.3"
+    "@electron/packager": "^20.3.0",
+    "electron": "^28.3.3",
+    "electron-builder": "^26.15.3"
   },
   "engines": {
     "node": ">=18"
