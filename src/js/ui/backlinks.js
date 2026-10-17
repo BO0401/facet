@@ -1,7 +1,7 @@
 /* backlinks.js — 反向链接 / 文档图谱面板
  *
  * 逆推依据：Typora 的 45（文件搜索）与 44（大纲）从不相连。
- * Facet 用 [[wikilink]] 把它们接起来：哪些文档引用了当前文档。
+ * FaceT 用 [[wikilink]] 把它们接起来：哪些文档引用了当前文档。
  */
 import { el, clear, on, escHtml } from './dom.js';
 

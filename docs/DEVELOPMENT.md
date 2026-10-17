@@ -29,7 +29,7 @@ npm start            # 启动 Electron 桌面版（自动 build）
 | `npm run test:electron` | Electron 端到端（需先 `npm install`，17 项断言） |
 | `npm run build` | 生成 `dist/facet.web.html` 与 `build/app/` |
 | `npm start` | Electron 开发运行 |
-| `npm run dist:dir` | 打包成可运行目录（`build/out/Facet-win32-x64/`） |
+| `npm run dist:dir` | 打包成可运行目录（`build/out/FaceT-win32-x64/`） |
 | `npm run dist` | 打包成单个便携 exe（`release/`） |
 
 ## 开发工作流
@@ -63,12 +63,12 @@ scope: core / ui / data / build / docs / test
 ### `build/app/`（Electron 运行目录）
 
 `index.html` + `src/` + `electron/` + 最小 `package.json`。
-electron-packager 把这个目录打成 `Facet.exe`。
+electron-packager 把这个目录打成 `FaceT.exe`。
 
 ### `release/`（单文件便携版）
 
 `build/make-exe.js`：electron-builder 的 portable 目标，产出
-`release/Facet-Portable-<version>.exe`（约 68 MB，自包含单文件，双击即用，
+`release/FaceT-Portable-<version>.exe`（约 68 MB，自包含单文件，双击即用，
 首次运行解压到临时目录）。两个打包脚本都直接调用各自的 Node API
 （`@electron/packager` / electron-builder 的 CLI 入口），不经过 npx——
 Windows 上 `spawn('npx.cmd')` 无法直接启动 `.cmd`。

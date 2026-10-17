@@ -1,9 +1,9 @@
-/* markdown.js — Facet Markdown 管线门面
+/* markdown.js — FaceT Markdown 管线门面
  *
  * 管线：Source --parse--> AST --render--> HTML
  * 模式：
  *   'spec'   纯 CommonMark 0.31.2（测试用，全部扩展关闭）
- *   'facet'  Facet 完整体验（GFM 扩展 + 数学 + 双链 + 脚注 + 图表 + YAML）
+ *   'facet'  FaceT 完整体验（GFM 扩展 + 数学 + 双链 + 脚注 + 图表 + YAML）
  */
 import { parseBlocks } from './blocks.js';
 import { renderHTML } from './render.js';

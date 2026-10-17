@@ -1,4 +1,4 @@
-/* e2e-electron.js — Facet 桌面版端到端验证（自包含启动器）
+/* e2e-electron.js — FaceT 桌面版端到端验证（自包含启动器）
  *
  * 两种用法：
  *   1) node test/e2e/e2e-electron.js          —— 由 Node 驱动：

@@ -110,10 +110,10 @@ Blob 下载。上层只面对 `openFile()/saveFile()/saveFileAs()` 三个语义�
 
 本项目的上游依据是 Typora 1.12.3 的逆向结果（见 `Typora_REA_还原主要功能.md`）：
 
-| Typora 内部模块 | Facet 对应 | 差异 |
+| Typora 内部模块 | FaceT 对应 | 差异 |
 |---|---|---|
-| `19 MarkParser` | `core/blocks.js` + `core/inlines.js` | 自有实现，覆盖 CommonMark 0.31.2 全集 + Facet 扩展 |
-| `13 NodeDef` | `core/ast.js` + `ui/astview.js` | **外化**：Typora 藏起来，Facet 是一等公民 |
+| `19 MarkParser` | `core/blocks.js` + `core/inlines.js` | 自有实现，覆盖 CommonMark 0.31.2 全集 + FaceT 扩展 |
+| `13 NodeDef` | `core/ast.js` + `ui/astview.js` | **外化**：Typora 藏起来，FaceT 是一等公民 |
 | `14 Node2HTML` | `core/render.js` | 双模：spec / facet |
 | `12 Node2Mark` | `ui/export.js` serializeBlock | 显式暴露为「导出规范化 Markdown」 |
 | `20` contenteditable 内核 | textarea + AST 驱动渲染 | 删掉 450KB 的选区/撤销/输入法驯服成本 |

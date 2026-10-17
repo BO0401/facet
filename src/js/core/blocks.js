@@ -1,4 +1,4 @@
-/* blocks.js — CommonMark 块级解析器 + Facet 块级扩展
+/* blocks.js — CommonMark 块级解析器 + FaceT 块级扩展
  *
  * 算法（对齐 commonmark.js 参考实现）：
  *   维护「开放块栈」，逐行三阶段处理——
@@ -7,7 +7,7 @@
  *   3) 剩余文本归位（惰性段落延续优先）
  *   块内容用 _content 字符串累积（每行带 \n），与参考实现一致。
  *
- * Facet 扩展（opts 开关控制，规范模式下全部关闭）：
+ * FaceT 扩展（opts 开关控制，规范模式下全部关闭）：
  *   tables 表格 / math $$ 块 / yaml 前言 / footnotes 脚注 / diagrams 图表围栏
  */
 import { N, resetIds } from './ast.js';
@@ -36,7 +36,7 @@ const RE_HTML_BLOCK_CLOSE = [
 ];
 const RE_THEMATIC = /^(?:\*[ \t]*){3,}$|^(?:_[ \t]*){3,}$|^(?:-[ \t]*){3,}$/;
 /* 行首「可能特殊」字符：命中才会进入 blockStarts 逐一尝试（性能优化）。
- * | 必须在内：Facet 表格扩展以 | 开头，否则会被快路径跳过。 */
+ * | 必须在内：FaceT 表格扩展以 | 开头，否则会被快路径跳过。 */
 const RE_MAYBE_SPECIAL = /^[#`~*+_=<>0-9-$\[|]/;
 const RE_NON_SPACE = /[^ \t\f\v\r\n]/;
 const RE_BULLET = /^[*+-]/;
@@ -47,7 +47,7 @@ const RE_CLOSING_FENCE = /^(?:`{3,}|~{3,})(?=[ \t]*$)/;
 const RE_SETEXT = /^(?:=+|-+)[ \t]*$/;
 const RE_LINE_ENDING = /\r\n|\n|\r/;
 
-/* Facet 扩展正则 */
+/* FaceT 扩展正则 */
 const RE_MATH_FENCE = /^ {0,3}\$\$[ \t]*$/;
 const RE_YAML_OPEN = /^---[ \t]*$/;
 const RE_YAML_CLOSE = /^(?:---|\.\.\.)[ \t]*$/;
@@ -319,7 +319,7 @@ export function parseBlocks(src, opts) {
   }
 
   const blockStarts = [
-    /* YAML 前言（仅文档第一行，Facet） */
+    /* YAML 前言（仅文档第一行，FaceT） */
     function (parser) {
       if (!o.yaml || parser.lineNo !== 0) return 0;
       const rest = parser.currentLine.slice(parser.nextNonspace);
@@ -361,7 +361,7 @@ export function parseBlocks(src, opts) {
       return 0;
     },
 
-    /* 围栏代码块 / 图表围栏（Facet） */
+    /* 围栏代码块 / 图表围栏（FaceT） */
     function (parser) {
       let match;
       if (!parser.indented && (match = parser.currentLine.slice(parser.nextNonspace).match(RE_FENCE))) {
@@ -399,7 +399,7 @@ export function parseBlocks(src, opts) {
       return 0;
     },
 
-    /* $$ 数学块（Facet） */
+    /* $$ 数学块（FaceT） */
     function (parser) {
       if (!o.math) return 0;
       const rest = parser.currentLine.slice(parser.nextNonspace);
@@ -410,7 +410,7 @@ export function parseBlocks(src, opts) {
       return 2;
     },
 
-    /* 脚注定义（Facet） */
+    /* 脚注定义（FaceT） */
     function (parser) {
       if (!o.footnotes) return 0;
       const rest = parser.currentLine.slice(parser.nextNonspace);
@@ -475,7 +475,7 @@ export function parseBlocks(src, opts) {
       return 0;
     },
 
-    /* 表格（Facet）：段落首行 + 分隔行 → 表格 */
+    /* 表格（FaceT）：段落首行 + 分隔行 → 表格 */
     function (parser, container) {
       if (!o.tables || container.type !== 'paragraph') return 0;
       const nLines = container._content === '' ? 0 : container._content.split('\n').length - 1;

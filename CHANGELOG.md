@@ -5,7 +5,7 @@
 
 ## [1.0.0] - 2026-10-17
 
-首个完整版本：自有 CommonMark 引擎（规范 652/652）+ Facet 三态工作台 + Windows 便携 exe。
+首个完整版本：自有 CommonMark 引擎（规范 652/652）+ FaceT 三态工作台 + Windows 便携 exe。
 
 ### 新增
 
@@ -16,7 +16,7 @@
     实体解码、自动链接、HTML 行内、硬换行
   - 双模渲染器：`spec` 模式输出规范 HTML（测试用）/ `facet` 模式附加
     `data-nid`、`blk` 类、高亮、TeX、双链、脚注标记
-  - Facet 扩展（opts 开关）：表格（含对齐）、`$$`/`$` 数学、YAML 前言、脚注、
+  - FaceT 扩展（opts 开关）：表格（含对齐）、`$$`/`$` 数学、YAML 前言、脚注、
     图表围栏、删除线、`[[双链]]`、脚注引用
   - 轻量 TeX 子集（递归括号配对，`\frac{\sqrt{}}` 不再截断）与代码高亮（单正则分词）
 - **三态工作台（`src/js/ui/`）**
@@ -50,8 +50,8 @@
 
 | 产物 | 路径 | 启动验证 |
 |---|---|---|
-| 可运行目录 | `build/out/Facet-win32-x64/Facet.exe` | 启动存活，无 FATAL |
-| 单文件便携版 | `release/Facet-Portable-1.0.0.exe`（约 68 MB） | 启动存活，无 FATAL |
+| 可运行目录 | `build/out/FaceT-win32-x64/FaceT.exe` | 启动存活，无 FATAL |
+| 单文件便携版 | `release/FaceT-Portable-1.0.0.exe`（约 68 MB） | 启动存活，无 FATAL |
 | Web 单文件 | `dist/facet.web.html`（189 KB，零依赖） | 冒烟测试 13 项断言全过 |
 
 ### 修复（开发过程中修掉的实现偏差）
@@ -62,7 +62,7 @@
 - `isSpaceOrTab` 比较字符码与字符串恒为 false → 列表 padding 全错
 - 链接标题正则：单引号替代缺闭合引号且缺 `|` 分隔符 → `'…'`/`(…)` 标题不解析
 - 列表结束位置未向父层传递 → 空行分隔的嵌套列表误判 tight
-- `RE_MAYBE_SPECIAL` 缺 `|` → Facet 表格扩展被 Phase 2 快路径跳过
+- `RE_MAYBE_SPECIAL` 缺 `|` → FaceT 表格扩展被 Phase 2 快路径跳过
 - 双链/脚注把 match 字符串当数组取捕获组 → `m[1]` 取到第二个字符
 - `String.replace` 替换串含 `$` 被当特殊模式展开 → 构建产物被污染
 - 块引用序列化漏掉子块；任务列表序列化丢失勾选状态
@@ -70,4 +70,4 @@
   → 首次启动文档下拉框为空、新建/打开的文档不入列表（e2e 抓出）
 - `spawn('npx.cmd')` 在 Windows 上无法直接启动 `.cmd` → 打包脚本改用 Node API
 
-[1.0.0]: https://github.com/your-name/facet/releases/tag/v1.0.0
+[1.0.0]: https://github.com/BO0401/facet/releases/tag/v1.0.0

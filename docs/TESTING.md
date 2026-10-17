@@ -1,6 +1,6 @@
 # 测试
 
-Facet 的质量基线只有一条硬规则：**报告的数字必须是真实跑出来的，不谎报**。
+FaceT 的质量基线只有一条硬规则：**报告的数字必须是真实跑出来的，不谎报**。
 
 ## 运行
 
@@ -26,7 +26,7 @@ npm run test:electron # Electron 桌面版端到端（真实 BrowserWindow + 渲
 说明：
 
 - 规范示例中的 `→` 字符代表制表符，`test/spec.json` 已按规范前言约定转换为真实 `\t`（输入与期望 HTML 同步转换），`note` 字段有记录。
-- 测试以 **spec 模式**（`SPEC_OPTS`：全部 Facet 扩展关闭）运行，保证与 CommonMark 参考实现的逐字节一致。
+- 测试以 **spec 模式**（`SPEC_OPTS`：全部 FaceT 扩展关闭）运行，保证与 CommonMark 参考实现的逐字节一致。
 - runner 支持 `--section="Tabs"` 按章节过滤、`--show=N` 控制失败详情数量、`--all` 输出全量。
 - 退出码：全部通过为 0，否则为 1（CI 可直接用）。
 
@@ -40,7 +40,7 @@ npm run test:electron # Electron 桌面版端到端（真实 BrowserWindow + 渲
 | `isSpaceOrTab` | 列表 padding 全错（`-    foo` 当作 2 列） | 比较字符码与字符串，恒为 false |
 | 链接标题正则 | `'title'` / `(title)` 标题不解析 | 单引号替代缺闭合引号，且缺 `\|` 分隔符 |
 | 列表结束位置 | 空行分隔的嵌套列表判成 tight | list/item finalize 未把结束位置传给父层（参考实现取自最后一个子块） |
-| `RE_MAYBE_SPECIAL` | Facet 表格完全不解析 | `\|` 不在快路径字符集，Phase 2 被跳过 |
+| `RE_MAYBE_SPECIAL` | FaceT 表格完全不解析 | `\|` 不在快路径字符集，Phase 2 被跳过 |
 
 ## 2. 应用层单元测试（`test/unit/unit.test.js`）
 
@@ -101,7 +101,7 @@ Electron 二进制、清理环境、等 marker 汇总），Electron 侧创建真
 ## 5. 覆盖边界（如实声明）
 
 - 规范测试只覆盖 CommonMark 0.31.2；GFM 表格/删除线、数学、双链、脚注、图表、
-  YAML 是 Facet 扩展，**不在 652 例之内**，其正确性由单元测试 + 冒烟测试 +
+  YAML 是 FaceT 扩展，**不在 652 例之内**，其正确性由单元测试 + 冒烟测试 +
   人工验收保证。
 - `dist/facet.web.html` 的浏览器实测（点击交互、滚动同步、主题切换）依赖人工验收；
   node 桩不模拟布局与事件委托的完整链路。

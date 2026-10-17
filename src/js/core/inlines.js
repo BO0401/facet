@@ -1,7 +1,7 @@
 /* inlines.js — CommonMark 行内解析器
  * 语义对齐 commonmark.js 参考实现：分隔符栈（openers_bottom）、
  * 括号栈（行内/引用/折叠/简写链接）、实体、代码 span、自动链接、原始 HTML。
- * Facet 扩展（strikethrough / math / wikilink / footref）由 opts 开关控制，
+ * FaceT 扩展（strikethrough / math / wikilink / footref）由 opts 开关控制，
  * 规范模式下全部关闭，保证 CommonMark 用例逐字通过。
  */
 import { N } from './ast.js';

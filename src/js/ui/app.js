@@ -1,4 +1,4 @@
-/* app.js — Facet 应用外壳：把各面板与数据层接起来
+/* app.js — FaceT 应用外壳：把各面板与数据层接起来
  *
  * 状态机：当前文档 → 源码（唯一真源）→ AST → { 渲染, 大纲, AST 树, 图谱, 统计 }
  * 任何面板的改动最终都回到源码文本，再走同一条解析链路。
@@ -19,14 +19,14 @@ import {
 import { buildGraph } from '../data/graph.js';
 import { openFile, saveFile, saveFileAs, nativeMode } from '../data/fs.js';
 
-const SEED = `# 欢迎使用 Facet
+const SEED = `# 欢迎使用 FaceT
 
 > **One source, many facets.** —— 一份源码，多个切面。
 > 左边写 *Markdown*，中间看渲染，右边看 **AST**。三态共享同一棵树。
 
 ## 这是什么
 
-Facet 是一个本地优先的结构化 Markdown 工作台。它把 Typora 藏进黑盒的
+FaceT 是一个本地优先的结构化 Markdown 工作台。它把 Typora 藏进黑盒的
 \`Markdown → AST → HTML\` 管线完整外化：
 
 - **三态同屏**：源码 / 渲染 / AST，点击任意一态，另两态跟随定位
@@ -48,7 +48,7 @@ Facet 是一个本地优先的结构化 Markdown 工作台。它把 Typora 藏�
 | CommonMark 0.31.2 | ✅ | 652 个规范用例全部通过 |
 | 表格 / 数学 / 代码高亮 | ✅ | 行内 \$E=mc^2\$ 与块级公式 |
 | 任务列表 | ✅ | 点中间复选框即回写源码 |
-| 双链与反向链接 | ✅ | [[欢迎使用 Facet]] |
+| 双链与反向链接 | ✅ | [[欢迎使用 FaceT]] |
 | 快照时间轴 | ✅ | 自动 + 手动，可 diff |
 | 导出 md/html/JSON | ✅ | AST 作为 IR |
 
@@ -61,7 +61,7 @@ Facet 是一个本地优先的结构化 Markdown 工作台。它把 Typora 藏�
 ## 代码
 
 \`\`\`js
-// Facet 管线：Source → AST → 任意渲染
+// FaceT 管线：Source → AST → 任意渲染
 const ast = parseMarkdown(src, FACET_OPTS);
 const html = renderHTML(ast, 'facet');
 \`\`\`
@@ -108,7 +108,7 @@ export class App {
     const hashDoc = location.hash.startsWith('#doc=') ? location.hash.slice(5) : null;
     let doc = (hashDoc && getDoc(hashDoc)) || getDoc(getActiveDocId());
     if (!doc) {
-      doc = newDoc('欢迎使用 Facet', SEED);
+      doc = newDoc('欢迎使用 FaceT', SEED);
       addSnap(doc.id, SEED, true);
     }
     await this.openDoc(doc.id, { force: true });

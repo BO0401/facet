@@ -1,4 +1,4 @@
-/* panes.js — 三态同屏与双向映射（Facet 的核心交互）
+/* panes.js — 三态同屏与双向映射（FaceT 的核心交互）
  *
  * 源码（textarea）/ 渲染（facet HTML）/ AST（树）三态共享同一棵 AST：
  *   源码改动 → 重新解析 → 渲染 + AST 刷新

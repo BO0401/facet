@@ -1,6 +1,6 @@
 /* main.cjs — Electron 主进程
  *
- * Facet 的桌面外壳：提供原生文件对话框与菜单。
+ * FaceT 的桌面外壳：提供原生文件对话框与菜单。
  * 渲染层与 Web 版完全同源（index.html + src/js/**），此处只做原生能力桥接。
  */
 'use strict';
@@ -17,7 +17,7 @@ function createWindow() {
     height: 900,
     minWidth: 720,
     minHeight: 480,
-    title: 'Facet · 切面',
+    title: 'FaceT · 切面',
     icon: path.join(__dirname, '..', 'build', 'icon.png'),
     backgroundColor: '#f6f7f9',
     titleBarStyle: process.platform === 'darwin' ? 'hiddenInset' : 'default',
@@ -156,14 +156,14 @@ function buildMenu() {
       submenu: [
         {
           label: 'GitHub 仓库',
-          click: () => shell.openExternal('https://github.com/your-name/facet'),
+          click: () => shell.openExternal('https://github.com/BO0401/facet'),
         },
         {
-          label: '关于 Facet',
+          label: '关于 FaceT',
           click: () => dialog.showMessageBox(mainWindow, {
             type: 'info',
-            title: '关于 Facet',
-            message: 'Facet · 切面',
+            title: '关于 FaceT',
+            message: 'FaceT · 切面',
             detail: 'One source, many facets.\n本地优先的结构化 Markdown 工作台。\n版本 ' + app.getVersion(),
           }),
         },

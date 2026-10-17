@@ -3,7 +3,7 @@
  * spec 模式：输出规范 CommonMark HTML（转义/pre/code/br 规则逐字对齐参考实现），
  *           用于 652 个规范用例测试。
  * facet 模式：同一 AST 附加 data-nid 节点映射、语法高亮、TeX 渲染、双链/脚注等
- *           Facet 扩展呈现。两模式共用同一套块/行内遍历与 cr/lit/tag 缓冲逻辑。
+ *           FaceT 扩展呈现。两模式共用同一套块/行内遍历与 cr/lit/tag 缓冲逻辑。
  */
 import { escapeXml } from './text.js';
 import { plainText } from './ast.js';

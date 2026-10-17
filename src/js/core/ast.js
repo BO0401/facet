@@ -1,4 +1,4 @@
-/* ast.js — Facet AST 基础设施
+/* ast.js — FaceT AST 基础设施
  * 每个节点带稳定 id 与源行号 pos.line（0 基），这是三态联动的锚点。
  */
 let SEQ = 0;

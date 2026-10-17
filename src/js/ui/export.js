@@ -1,7 +1,7 @@
 /* export.js — 导出（AST 作为 IR，导出只是换个渲染器）
  *
  * 逆推依据：Typora 的 5b/49/5a/64 各写各的（pandoc 子进程 + pdf-lib）。
- * Facet 全部输出共用同一棵 AST：
+ * FaceT 全部输出共用同一棵 AST：
  *   .md    源码原文（single source of truth）
  *   .html  完整独立 HTML（内联 CSS，可离线打开/打印）
  *   .json  AST（IR 可交换；剥离 parent 指针）
@@ -37,7 +37,7 @@ export function toAstJson(text) {
   return JSON.stringify({
     format: 'facet-ast',
     version: 1,
-    generator: 'Facet',
+    generator: 'FaceT',
     doc: stripParent(ast),
   }, null, 2);
 }
@@ -156,7 +156,7 @@ export function exportAs(kind, docName, text) {
       downloadBlob(base + '.ast.json', toAstJson(text), 'application/json;charset=utf-8');
       return base + '.ast.json';
     case 'pdf':
-      // 借浏览器打印管线（Typora 用 pandoc+pdf-lib 子进程，Facet 用 print CSS）
+      // 借浏览器打印管线（Typora 用 pandoc+pdf-lib 子进程，FaceT 用 print CSS）
       printCurrent();
       return null;
     default:

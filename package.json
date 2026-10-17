@@ -1,10 +1,29 @@
 {
   "name": "facet",
   "version": "1.0.0",
-  "description": "Facet · 切面 — 一份源码，多个切面。把 Markdown 的 AST 中间层做成一等公民的桌面工作台。",
+  "description": "FaceT — Markdown workbench that treats the AST as a first-class citizen: source / render / AST panes in sync, offline-first, zero runtime dependencies.",
   "type": "module",
-  "license": "MIT",
+  "license": "CC-BY-NC-SA-4.0",
+  "author": "bo天天开心 (BO0401)",
   "main": "electron/main.cjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/BO0401/facet.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BO0401/facet/issues"
+  },
+  "homepage": "https://github.com/BO0401/facet#readme",
+  "keywords": [
+    "markdown",
+    "markdown-editor",
+    "ast",
+    "commonmark",
+    "wysiwyg",
+    "electron",
+    "offline-first",
+    "notes"
+  ],
   "scripts": {
     "test": "npm run test:spec && npm run test:unit && npm run test:smoke",
     "test:spec": "node test/run-spec.js",

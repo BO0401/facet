@@ -1,6 +1,6 @@
 /* outline.js — 大纲（由 AST 直接生成，对应 Typora 模块 44 的升级）
  *
- * Typora 的大纲需要单独扫描标题文本；Facet 的大纲就是 AST 遍历的副产品。
+ * Typora 的大纲需要单独扫描标题文本；FaceT 的大纲就是 AST 遍历的副产品。
  * 点击条目 → 渲染区滚动到对应块 + 源码区跳到对应行。
  */
 import { el, clear, on, escHtml } from './dom.js';

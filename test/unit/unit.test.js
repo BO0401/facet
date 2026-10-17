@@ -1,4 +1,4 @@
-/* unit.test.js — Facet 应用层单元测试（node 运行，无浏览器依赖）
+/* unit.test.js — FaceT 应用层单元测试（node 运行，无浏览器依赖）
  *
  * 覆盖：facet 模式渲染标记、AST JSON 导出、规范化序列化、独立 HTML、
  *       行级 diff、文档图谱/反向链接、快照存储（localStorage 桩）。
