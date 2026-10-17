@@ -26,6 +26,7 @@ npm start            # 启动 Electron 桌面版（自动 build）
 | `npm run test:spec` | CommonMark 652 例 |
 | `npm run test:unit` | 应用层单元测试 |
 | `npm run test:smoke` | 构建 + 单文件冒烟 |
+| `npm run test:electron` | Electron 端到端（需先 `npm install`，17 项断言） |
 | `npm run build` | 生成 `dist/facet.web.html` 与 `build/app/` |
 | `npm start` | Electron 开发运行 |
 | `npm run dist:dir` | 打包成可运行目录（`build/out/Facet-win32-x64/`） |
@@ -66,8 +67,22 @@ electron-packager 把这个目录打成 `Facet.exe`。
 
 ### `release/`（单文件便携版）
 
-`build/make-exe.js`：优先 electron-builder portable 目标；未安装时回退
-iexpress SFX（系统自带）。便携版首次运行会解压到临时目录。
+`build/make-exe.js`：electron-builder 的 portable 目标，产出
+`release/Facet-Portable-<version>.exe`（约 68 MB，自包含单文件，双击即用，
+首次运行解压到临时目录）。两个打包脚本都直接调用各自的 Node API
+（`@electron/packager` / electron-builder 的 CLI 入口），不经过 npx——
+Windows 上 `spawn('npx.cmd')` 无法直接启动 `.cmd`。
+
+electron 二进制下载走 npmmirror 镜像（`electronDownload.mirror`），
+避免 GitHub releases 限流。
+
+## 端到端测试的环境注意事项
+
+`npm run test:electron` 在以下开发机环境会自动应对（详见 `docs/TESTING.md`）：
+
+- 宿主是 Electron 应用（如 WorkBuddy/VS Code）时，`ELECTRON_RUN_AS_NODE=1`
+  会被继承，导致 electron.exe 退化为纯 Node——启动器会清理该变量。
+- 无 GPU / 容器 / 沙箱环境 GPU 进程崩溃——自动以 `--disable-gpu` 重试。
 
 ## 调试技巧
 

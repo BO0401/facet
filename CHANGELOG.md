@@ -32,7 +32,7 @@
   双链图谱、文件 IO 三档降级（Electron 原生 / File System Access API / 下载上传）
 - **桌面外壳（`electron/`）**：原生文件对话框、应用菜单、contextBridge 桥
 - **构建（`build/`）**：单文件 Web 版（`dist/facet.web.html`，模块展平 + 构建自检）、
-  Electron 运行目录、electron-packager 打包、iexpress SFX 兜底单文件
+  Electron 运行目录、electron-packager 可运行目录版、electron-builder 单文件便携版
 - **工程化**：MIT LICENSE、范围声明（SCOPE.md）、CI（GitHub Actions 三平台跑测试）、
   issue / PR 模板、Conventional Commits 规范
 
@@ -42,6 +42,17 @@
   `→` 制表符已按规范约定转换）
 - 应用层单元测试 19 项：facet 渲染标记、AST JSON、序列化往返、diff、图谱、统计
 - 构建冒烟：DOM 桩执行单文件产物，验证启动与渲染链路
+- Electron 端到端 **17/17**：真实 BrowserWindow + 渲染进程 DOM 探针，
+  覆盖启动、原生桥、三态、渲染特性、数据层、菜单事件交互、编辑→渲染联动、控制台健康度
+  （`test/e2e/e2e-electron.cjs`；自动清理 `ELECTRON_RUN_AS_NODE` 与无 GPU 环境降级）
+
+### 打包产物（本机实测）
+
+| 产物 | 路径 | 启动验证 |
+|---|---|---|
+| 可运行目录 | `build/out/Facet-win32-x64/Facet.exe` | 启动存活，无 FATAL |
+| 单文件便携版 | `release/Facet-Portable-1.0.0.exe`（约 68 MB） | 启动存活，无 FATAL |
+| Web 单文件 | `dist/facet.web.html`（189 KB，零依赖） | 冒烟测试 13 项断言全过 |
 
 ### 修复（开发过程中修掉的实现偏差）
 
@@ -55,5 +66,8 @@
 - 双链/脚注把 match 字符串当数组取捕获组 → `m[1]` 取到第二个字符
 - `String.replace` 替换串含 `$` 被当特殊模式展开 → 构建产物被污染
 - 块引用序列化漏掉子块；任务列表序列化丢失勾选状态
+- `refreshDocList()` 早于种子文档创建执行且 `openDoc()` 不刷新列表
+  → 首次启动文档下拉框为空、新建/打开的文档不入列表（e2e 抓出）
+- `spawn('npx.cmd')` 在 Windows 上无法直接启动 `.cmd` → 打包脚本改用 Node API
 
 [1.0.0]: https://github.com/your-name/facet/releases/tag/v1.0.0

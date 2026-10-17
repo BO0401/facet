@@ -61,6 +61,14 @@ npm run dist        # 产出 release/Facet-Portable-<version>.exe
 npm install
 npm start           # Electron 开发模式
 npm test            # 规范 + 单元 + 冒烟测试
+npm run test:electron  # Electron 桌面版端到端（17 项断言）
+```
+
+### 打包
+
+```bash
+npm run dist:dir    # 可运行目录 build/out/Facet-win32-x64/Facet.exe
+npm run dist        # 单文件便携版 release/Facet-Portable-<version>.exe
 ```
 
 详见 [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md)。
@@ -72,7 +80,7 @@ npm test            # 规范 + 单元 + 冒烟测试
 | [docs/SCOPE.md](docs/SCOPE.md) | 范围基准：仿照清单 / 新增 / 明确排除 |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 架构、目录、关键设计决策、与 Typora 模块对应关系 |
 | [docs/DEVELOPMENT.md](docs/DEVELOPMENT.md) | 环境、命令、工作流、构建产物、调试技巧 |
-| [docs/TESTING.md](docs/TESTING.md) | 测试基线：652/652 真实通过率与修复记录 |
+| [docs/TESTING.md](docs/TESTING.md) | 测试基线：652/652 真实通过率、e2e 17/17、修复记录 |
 | [CHANGELOG.md](CHANGELOG.md) | 版本历史 |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | 提交规范与贡献流程 |
 
@@ -80,8 +88,8 @@ npm test            # 规范 + 单元 + 冒烟测试
 
 - **运行时**：零第三方依赖（引擎、TeX 子集、代码高亮全部自研）；electron 仅为桌面外壳
 - **语言**：原生 ES Module + 原生 DOM
-- **打包**：electron-packager / electron-builder / iexpress 兜底
-- **测试**：CommonMark 652 例规范测试 + 19 项单元测试 + 构建冒烟
+- **打包**：electron-packager / electron-builder
+- **测试**：CommonMark 652 例规范测试 + 19 项单元测试 + 构建冒烟 + Electron 端到端 17 项
 
 ## 许可
 
