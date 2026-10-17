@@ -302,6 +302,7 @@ export class App {
     if (opts.jumpLine !== undefined) {
       requestAnimationFrame(() => this.panes.jumpSourceToLine(opts.jumpLine));
     }
+    this.refreshDocList();
     this.setState('已打开「' + doc.name + '」');
   }
 
