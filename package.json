@@ -6,13 +6,14 @@
   "license": "MIT",
   "main": "electron/main.cjs",
   "scripts": {
-    "test": "npm run test:spec && npm run test:unit",
+    "test": "npm run test:spec && npm run test:unit && npm run test:smoke",
     "test:spec": "node test/run-spec.js",
-    "test:unit": "node --test test/unit/",
+    "test:unit": "node test/unit/unit.test.js",
+    "test:smoke": "npm run build && node test/unit/bundle-smoke.js",
     "build": "node build/bundle.js",
-    "start": "npm run build && electron .",
-    "dist": "npm run build && node build/make-exe.js",
-    "dist:dir": "npm run build && node build/make-app.js"
+    "start": "electron .",
+    "dist:dir": "npm run build && node build/make-app.js",
+    "dist": "npm run build && node build/make-exe.js"
   },
   "devDependencies": {
     "electron": "^28.3.3"

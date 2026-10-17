@@ -35,7 +35,9 @@ const RE_HTML_BLOCK_CLOSE = [
   /\]\]>/,
 ];
 const RE_THEMATIC = /^(?:\*[ \t]*){3,}$|^(?:_[ \t]*){3,}$|^(?:-[ \t]*){3,}$/;
-const RE_MAYBE_SPECIAL = /^[#`~*+_=<>0-9-$\[]/;
+/* 行首「可能特殊」字符：命中才会进入 blockStarts 逐一尝试（性能优化）。
+ * | 必须在内：Facet 表格扩展以 | 开头，否则会被快路径跳过。 */
+const RE_MAYBE_SPECIAL = /^[#`~*+_=<>0-9-$\[|]/;
 const RE_NON_SPACE = /[^ \t\f\v\r\n]/;
 const RE_BULLET = /^[*+-]/;
 const RE_ORDERED = /^(\d{1,9})([.)])/;

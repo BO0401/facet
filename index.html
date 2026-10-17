@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Facet · 切面 — 一份源码，多个切面</title>
+<meta name="description" content="本地优先的结构化 Markdown 工作台：源码 / AST / 渲染三态同屏，AST 是一等公民。">
+<link rel="stylesheet" href="src/css/app.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f6ef7'/%3E%3Cpath d='M9 8v16M16 8v16M23 8v16' stroke='white' stroke-width='2.6' stroke-linecap='round'/%3E%3C/svg%3E">
+</head>
+<body data-view="split">
+
+<header id="topbar">
+  <div class="brand" title="Facet · 切面">
+    <svg viewBox="0 0 32 32" width="22" height="22" aria-hidden="true"><rect width="32" height="32" rx="7" fill="currentColor"/><path d="M9 8v16M16 8v16M23 8v16" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>
+    <span>Facet</span>
+  </div>
+
+  <input class="docname" id="docname" title="文档名（改完回车生效）" value="未命名文档" spellcheck="false">
+
+  <div class="grp">
+    <button id="btn-new" class="btn" title="新建文档">＋</button>
+    <select id="doclist" class="sel" title="切换文档"></select>
+  </div>
+
+  <div class="grp">
+    <button id="btn-open" class="btn" title="打开本地 .md 文件（Ctrl/Cmd+O）">打开</button>
+    <button id="btn-save" class="btn" title="保存到本地文件（Ctrl/Cmd+S）">保存</button>
+    <button id="btn-save-as" class="btn" title="另存为">另存为</button>
+    <button id="btn-snap" class="btn" title="手动保存一个快照">快照</button>
+    <select id="export" class="sel" title="导出">
+      <option value="">导出▾</option>
+      <option value="md">Markdown (.md)</option>
+      <option value="md-norm">规范化 Markdown</option>
+      <option value="html">独立 HTML</option>
+      <option value="json">AST JSON</option>
+      <option value="pdf">打印 / PDF</option>
+    </select>
+    <button id="btn-find" class="btn" title="查找替换（Ctrl/Cmd+F）">查找</button>
+  </div>
+
+  <div class="grp" id="viewgrp" title="视图切换">
+    <button class="btn" data-view="src" title="仅源码">源码</button>
+    <button class="btn" data-view="render" title="仅渲染">渲染</button>
+    <button class="btn" data-view="ast" title="仅 AST">AST</button>
+    <button class="btn" data-view="split" title="三态分屏">分屏</button>
+  </div>
+
+  <button id="btn-theme" class="btn icon" title="切换主题">☾</button>
+</header>
+
+<div id="find-host"></div>
+
+<main id="layout">
+  <aside id="sidebar">
+    <nav id="sidetabs">
+      <button data-tab="outline" class="on" title="大纲">大纲</button>
+      <button data-tab="links" title="链接与图谱">链接</button>
+      <button data-tab="snaps" title="快照时间轴">快照</button>
+    </nav>
+    <div class="pane on" id="pane-outline"></div>
+    <div class="pane" id="pane-links"></div>
+    <div class="pane" id="pane-snaps"></div>
+  </aside>
+
+  <section id="center">
+    <div id="src-wrap">
+      <div class="pane-h">源码 <span class="pane-hint">唯一真源</span></div>
+      <textarea id="src" spellcheck="false" wrap="soft" placeholder="在这里输入 Markdown…"></textarea>
+    </div>
+    <div id="view-wrap">
+      <div class="pane-h">渲染 <span class="pane-hint">facet 模式</span></div>
+      <article id="render"></article>
+    </div>
+    <div id="ast-pane">
+      <div class="pane-h">
+        AST <span class="pane-hint">一等公民</span>
+        <span class="pane-tools">
+          <button id="btn-blockonly" class="mini on" title="仅显示块级节点">块</button>
+          <button id="btn-expand" class="mini" title="展开/折叠全部">±</button>
+        </span>
+      </div>
+      <div id="ast-tree"></div>
+    </div>
+  </section>
+</main>
+
+<footer id="statusbar">
+  <span><span class="dot"></span><b id="st-state">就绪</b></span>
+  <span>词 <b id="st-words">0</b></span>
+  <span>行 <b id="st-lines">0</b></span>
+  <span>节点 <b id="st-nodes">0</b></span>
+  <span class="grow"></span>
+  <span>节点 id <b id="st-cur">—</b></span>
+</footer>
+
+<script type="module" src="src/js/main.js"></script>
+</body>
+</html>

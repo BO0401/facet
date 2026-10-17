@@ -89,6 +89,13 @@ export function createInlineParser(opts) {
       this.pos += m.index + m[0].length;
       return m[0];
     },
+    /* 需要捕获组时用这个：返回完整 match 数组并推进 pos */
+    matchGroups(re) {
+      const m = re.exec(this.subject.slice(this.pos));
+      if (m === null) return null;
+      this.pos += m.index + m[0].length;
+      return m;
+    },
     peek() { return this.pos < this.subject.length ? this.subject.charCodeAt(this.pos) : -1; },
     spnl() { this.match(RE_SPNL); return true; },
 
@@ -458,7 +465,7 @@ export function createInlineParser(opts) {
     },
 
     parseWikiLink(block) {
-      const m = this.match(RE_WIKILINK);
+      const m = this.matchGroups(RE_WIKILINK);
       if (m === null) return false;
       const target = m[1].trim();
       block.children.push(N('wikilink', { target, alias: (m[2] || m[1]).trim() }));
@@ -466,7 +473,7 @@ export function createInlineParser(opts) {
     },
 
     parseFootref(block) {
-      const m = this.match(RE_FOOTREF);
+      const m = this.matchGroups(RE_FOOTREF);
       if (m === null) return false;
       block.children.push(N('footref', { ref: m[1] }));
       return true;

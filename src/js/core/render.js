@@ -56,7 +56,7 @@ class Renderer {
       this.lit('<section class="footnotes">');
       for (const f of footnotes) {
         this.cr();
-        this.lit('<div class="footdef" data-nid="' + f.id + '"><b>[' + esc(f.ref) + ']</b> ');
+        this.lit('<div class="footdef" id="fn-' + esc(f.ref) + '" data-nid="' + f.id + '"><b>[' + esc(f.ref) + ']</b> ');
         this.inlines(f);
         this.lit('</div>');
       }
@@ -157,7 +157,8 @@ class Renderer {
           attrs.push(['class', (node.checked !== null && node.checked !== undefined) ? 'task blk' : 'blk']);
           this.tag('li', attrs);
           if (node.checked !== null && node.checked !== undefined) {
-            this.lit('<input type="checkbox" disabled' + (node.checked ? ' checked' : '') + '>');
+            // 可交互勾选：改动经 panes.js 的 onCheckbox 回到源码
+            this.lit('<input type="checkbox" class="task"' + (node.checked ? ' checked' : '') + '>');
           }
           for (const c of node.children) {
             if (c.type === 'paragraph') this.inlines(c);
