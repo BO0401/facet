@@ -1,0 +1,58 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: 测试（Node ${{ matrix.node }} / ${{ matrix.os }}）
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+
+      - name: 规范测试（CommonMark 652 例）
+        run: npm run test:spec
+
+      - name: 单元测试
+        run: npm run test:unit
+
+      - name: 构建 + 冒烟测试
+        run: npm run test:smoke
+
+  lint-spec:
+    name: 规范通过率门禁
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 必须 652/652
+        run: |
+          npm run test:spec | tee spec-out.txt
+          grep -q "652/652 通过（100.00%）" spec-out.txt || { echo "::error::规范通过率不是 100%"; exit 1; }
+
+  e2e-electron:
+    name: Electron 端到端（windows-latest）
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 安装依赖（electron 二进制走 npmmirror）
+        run: npm install
+      - name: 端到端验证（17 项断言）
+        run: npm run test:electron

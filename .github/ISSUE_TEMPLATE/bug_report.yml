@@ -1,0 +1,41 @@
+name: Bug 报告
+description: 报告一个缺陷
+labels: [bug]
+body:
+  - type: textarea
+    id: repro
+    attributes:
+      label: 最小复现
+      description: 能稳定复现的最简 Markdown 输入（或操作步骤）
+      placeholder: |
+        输入：
+        ```
+        | a | b |
+        |---|---|
+        ```
+        操作：点击渲染区表格
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期望行为
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+    validations:
+      required: true
+  - type: input
+    id: env
+    attributes:
+      label: 运行环境
+      placeholder: "Facet 1.0.0 便携版 / Windows 11 / 或 dist/facet.web.html + Chrome 129"
+    validations:
+      required: true
+  - type: textarea
+    id: extra
+    attributes:
+      label: 补充（截图 / 控制台输出）
