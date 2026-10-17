@@ -1,0 +1,23 @@
+{
+  "name": "facet",
+  "version": "1.0.0",
+  "description": "Facet · 切面 — 一份源码，多个切面。把 Markdown 的 AST 中间层做成一等公民的桌面工作台。",
+  "type": "module",
+  "license": "MIT",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "test": "npm run test:spec && npm run test:unit",
+    "test:spec": "node test/run-spec.js",
+    "test:unit": "node --test test/unit/",
+    "build": "node build/bundle.js",
+    "start": "npm run build && electron .",
+    "dist": "npm run build && node build/make-exe.js",
+    "dist:dir": "npm run build && node build/make-app.js"
+  },
+  "devDependencies": {
+    "electron": "^28.3.3"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

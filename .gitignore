@@ -1,0 +1,23 @@
+# 依赖
+node_modules/
+
+# 构建产物
+dist/
+build/app/
+build/out/
+release/
+*.exe
+
+# 测试与缓存
+_smoke.js
+_seed.md
+_run.js
+_test2.js
+_dbg.js
+modules.json
+*.log
+
+# 系统
+.DS_Store
+Thumbs.db
+desktop.ini
