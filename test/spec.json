@@ -3,62 +3,63 @@
  "version": "0.31.2",
  "source": "npm:commonmark-spec@0.31.2 (spec.txt)",
  "license": "CC-BY-4.0 (CommonMark spec)",
+ "note": "示例中的 → 字符已按规范约定转换为真实制表符",
  "sha256_spec_txt": "257c41ad946f7a1414a499aca402a1aa8fdac3678532266611348c1cf54f4b80",
  "count": 652,
  "examples": [
   {
    "section": "Tabs",
-   "example": "→foo→baz→→bim\n",
-   "html": "<pre><code>foo→baz→→bim\n</code></pre>\n"
+   "example": "\tfoo\tbaz\t\tbim\n",
+   "html": "<pre><code>foo\tbaz\t\tbim\n</code></pre>\n"
   },
   {
    "section": "Tabs",
-   "example": "  →foo→baz→→bim\n",
-   "html": "<pre><code>foo→baz→→bim\n</code></pre>\n"
+   "example": "  \tfoo\tbaz\t\tbim\n",
+   "html": "<pre><code>foo\tbaz\t\tbim\n</code></pre>\n"
   },
   {
    "section": "Tabs",
-   "example": "    a→a\n    ὐ→a\n",
-   "html": "<pre><code>a→a\nὐ→a\n</code></pre>\n"
+   "example": "    a\ta\n    ὐ\ta\n",
+   "html": "<pre><code>a\ta\nὐ\ta\n</code></pre>\n"
   },
   {
    "section": "Tabs",
-   "example": "  - foo\n\n→bar\n",
+   "example": "  - foo\n\n\tbar\n",
    "html": "<ul>\n<li>\n<p>foo</p>\n<p>bar</p>\n</li>\n</ul>\n"
   },
   {
    "section": "Tabs",
-   "example": "- foo\n\n→→bar\n",
+   "example": "- foo\n\n\t\tbar\n",
    "html": "<ul>\n<li>\n<p>foo</p>\n<pre><code>  bar\n</code></pre>\n</li>\n</ul>\n"
   },
   {
    "section": "Tabs",
-   "example": ">→→foo\n",
+   "example": ">\t\tfoo\n",
    "html": "<blockquote>\n<pre><code>  foo\n</code></pre>\n</blockquote>\n"
   },
   {
    "section": "Tabs",
-   "example": "-→→foo\n",
+   "example": "-\t\tfoo\n",
    "html": "<ul>\n<li>\n<pre><code>  foo\n</code></pre>\n</li>\n</ul>\n"
   },
   {
    "section": "Tabs",
-   "example": "    foo\n→bar\n",
+   "example": "    foo\n\tbar\n",
    "html": "<pre><code>foo\nbar\n</code></pre>\n"
   },
   {
    "section": "Tabs",
-   "example": " - foo\n   - bar\n→ - baz\n",
+   "example": " - foo\n   - bar\n\t - baz\n",
    "html": "<ul>\n<li>foo\n<ul>\n<li>bar\n<ul>\n<li>baz</li>\n</ul>\n</li>\n</ul>\n</li>\n</ul>\n"
   },
   {
    "section": "Tabs",
-   "example": "#→Foo\n",
+   "example": "#\tFoo\n",
    "html": "<h1>Foo</h1>\n"
   },
   {
    "section": "Tabs",
-   "example": "*→*→*→\n",
+   "example": "*\t*\t*\t\n",
    "html": "<hr />\n"
   },
   {
@@ -68,8 +69,8 @@
   },
   {
    "section": "Backslash escapes",
-   "example": "\\→\\A\\a\\ \\3\\φ\\«\n",
-   "html": "<p>\\→\\A\\a\\ \\3\\φ\\«</p>\n"
+   "example": "\\\t\\A\\a\\ \\3\\φ\\«\n",
+   "html": "<p>\\\t\\A\\a\\ \\3\\φ\\«</p>\n"
   },
   {
    "section": "Backslash escapes",
@@ -204,7 +205,7 @@
   {
    "section": "Entity and numeric character references",
    "example": "&#9;foo\n",
-   "html": "<p>→foo</p>\n"
+   "html": "<p>\tfoo</p>\n"
   },
   {
    "section": "Entity and numeric character references",
@@ -413,7 +414,7 @@
   },
   {
    "section": "Setext headings",
-   "example": "  Foo *bar\nbaz*→\n====\n",
+   "example": "  Foo *bar\nbaz*\t\n====\n",
    "html": "<h1>Foo <em>bar\nbaz</em></h1>\n"
   },
   {
