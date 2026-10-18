@@ -109,6 +109,8 @@ npm run dist           # 产出 release/FaceT-Portable-<version>.exe
 
 | 文档 | 内容 |
 |---|---|
+| [HANDOFF.md](HANDOFF.md) | **维护交接文档**：接手步骤、环境陷阱、质量红线、代码地图、发版流程、凭据配置（自包含，换 AI 维护先读这个） |
+| [AGENTS.md](AGENTS.md) | AI 维护者指令卡（铁律 + 命令速查，多数 AI 编码工具自动读取） |
 | [docs/NAMING.md](docs/NAMING.md) | 命名规范：品牌名 / 仓库名 / 代码标识符三层规则 |
 | [docs/SCOPE.md](docs/SCOPE.md) | 范围基准：仿照清单 / 新增 / 明确排除 |
 | [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 架构、目录、关键设计决策、与 Typora 模块对应关系 |
